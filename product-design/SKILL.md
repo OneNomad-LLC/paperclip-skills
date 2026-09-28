@@ -22,8 +22,10 @@ method, the file layout, the tooling and the bar for "done".
 2. **Ship files the board can open.** Local paths are invisible to the board. Every deliverable
    is uploaded to the issue as an artifact work product (see "Publishing" below) and listed
    in `design/manifest.json`.
-3. **One artboard per file, at its real size.** An artboard file renders exactly one screen,
-   one state, at one viewport, filling the page. No canvases with several device frames in
+3. **One artboard per file, at its real size, never cut off.** An artboard file renders exactly one screen,
+   one state, at one viewport, filling the page. Artboards can be any width and height. When a screen
+   is longer than the viewport, set `"height": "auto"` so the whole screen renders instead of being
+   cut off at the frame edge. No canvases with several device frames in
    one HTML file: the viewer lays artboards out, and the renderer can't lint a canvas.
 4. **Directions before detail.** New product or big redesign: show 2 or 3 distinct visual
    directions on one key screen and get a pick before building the system. Don't polish
@@ -87,7 +89,10 @@ Inline SVG icons always carry explicit `width` and `height` attributes.
   "artboards": [
     { "id": "library--default--desktop", "screen": "Library", "state": "default",
       "size": "desktop", "file": "artboards/library/library--default--desktop.html",
-      "status": "in_review", "issue": "PRJ-3", "notes": "Grid view, 214 files" }
+      "status": "in_review", "issue": "PRJ-3", "notes": "Grid view, 214 files" },
+    { "id": "settings--default--desktop", "screen": "Settings", "state": "default",
+      "size": "desktop", "width": 1440, "height": "auto",
+      "file": "artboards/settings/settings--default--desktop.html", "status": "draft" }
   ],
   "prototypes": [
     { "id": "usb-insert", "title": "Insert a USB library", "entry": "prototypes/usb-insert/index.html",
@@ -113,12 +118,15 @@ bash scripts/design-tool.sh design_render                          # re-render c
 bash scripts/design-tool.sh design_render '{"files":["screens/dashboard.html"]}'
 bash scripts/design-tool.sh design_feedback '{"issue":"PRJ-14"}'   # the comment plus two images: artboard with the pin, close-up
 bash scripts/design-tool.sh design_set_status '{"screen":"dashboard","status":"in_review","note":"vitals added"}'
+bash scripts/design-tool.sh design_add_size '{"artboardId":"settings--default--desktop","width":1440,"height":"auto"}'
 ```
 
 - **Feedback issues** ("Feedback: …") come from pins the board dropped on an artboard. Start with
   `design_feedback`, then open both image paths it prints with your image-reading tool. The pin is
   the red ring. Fix what's there, not what you guess from the text.
 - After changing files, run `design_render` and fix every lint error it reports before you hand off.
+  `content-cut-off` means part of the screen is hidden below its frame: make the artboard taller
+  (`"height": "auto"` in the manifest, or `design_add_size` for an existing artboard).
 - Mark the screens you changed `in_review` with `design_set_status`. Only the board sets `approved`.
 - `design_render` returns early on big renders. If it says it's still running, call `design_status`
   a little later.

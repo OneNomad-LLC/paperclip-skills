@@ -16,6 +16,7 @@ bash scripts/design-tool.sh design_status                          # artboards, 
 bash scripts/design-tool.sh design_feedback '{"issue":"PRJ-14"}'   # the comment plus two images of the pinned spot
 bash scripts/design-tool.sh design_render                          # re-render changed files, return lint
 bash scripts/design-tool.sh design_set_status '{"screen":"dashboard","status":"in_review"}'
+bash scripts/design-tool.sh design_add_size '{"artboardId":"settings--default--desktop","width":1440,"height":"auto"}'
 ```
 
 - Before routing or working a feedback issue, run `design_feedback` and open both image paths it
