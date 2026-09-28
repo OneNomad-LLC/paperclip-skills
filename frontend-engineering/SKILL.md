@@ -60,6 +60,14 @@ and the verification bar.
 - Register it in `design/manifest.json` under `prototypes` with `"kind": "coded"`, the
   `dist/index.html` path as `entry` and the live URL as `url`.
 
+## Design viewer tools
+
+The approved design lives in Paperclip's Design viewer. `bash scripts/design-tool.sh design_status`
+lists every artboard, its status and open feedback. When you get a "Feedback: …" issue about the built
+prototype, run `bash scripts/design-tool.sh design_feedback '{"issue":"ONE-14"}'` and open both
+images it prints. They show the artboard and the exact spot the board pointed at. Build to the
+artboards marked `approved`, and ask the designer about anything still `in_review`.
+
 ## Tooling
 
 - `scripts/shoot.mjs` renders URLs or files at several viewports and themes, lints the

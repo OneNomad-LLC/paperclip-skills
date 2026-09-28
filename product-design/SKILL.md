@@ -102,6 +102,27 @@ Inline SVG icons always carry explicit `width` and `height` attributes.
 `status` is one of `draft`, `in_review`, `changes_requested`, `approved`. Update the manifest
 in the same commit as the files it lists.
 
+## Design viewer tools
+
+The board reviews your work in Paperclip's Design viewer. It reads `design/` and renders every
+artboard itself. Four tools give you the same view. Call them with the helper in `scripts/`:
+
+```bash
+bash scripts/design-tool.sh design_status                          # artboards, statuses, lint, stale renders, open feedback
+bash scripts/design-tool.sh design_render                          # re-render changed files, return lint (what the board will see)
+bash scripts/design-tool.sh design_render '{"files":["screens/dashboard.html"]}'
+bash scripts/design-tool.sh design_feedback '{"issue":"ONE-14"}'   # the comment plus two images: artboard with the pin, close-up
+bash scripts/design-tool.sh design_set_status '{"screen":"dashboard","status":"in_review","note":"vitals added"}'
+```
+
+- **Feedback issues** ("Feedback: …") come from pins the board dropped on an artboard. Start with
+  `design_feedback`, then open both image paths it prints with your image-reading tool. The pin is
+  the red ring. Fix what's there, not what you guess from the text.
+- After changing files, run `design_render` and fix every lint error it reports before you hand off.
+- Mark the screens you changed `in_review` with `design_set_status`. Only the board sets `approved`.
+- `design_render` returns early on big renders. If it says it's still running, call `design_status`
+  a little later.
+
 ## Rendering and lint
 
 ```bash
@@ -146,7 +167,8 @@ local paths.
 ## Done means
 
 - Every screen x state x size in scope has an artboard, rendered in every theme.
-- `shoot.mjs` reports 0 errors. Warnings are fixed or explained in the handoff.
+- `design_render` and `shoot.mjs` report 0 errors. Warnings are fixed or explained in the handoff.
+- Every screen you touched is marked `in_review` in the Design viewer.
 - You looked at every contact sheet and wrote down what you changed after looking.
 - Manifest current, files committed, contact sheets and handoff uploaded to the issue.
 - Sign-off requested from the CEO/board with a short list of decisions they're approving.
