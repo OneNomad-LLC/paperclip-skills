@@ -64,7 +64,7 @@ and the verification bar.
 
 The approved design lives in Paperclip's Design viewer. `bash scripts/design-tool.sh design_status`
 lists every artboard, its status and open feedback. When you get a "Feedback: …" issue about the built
-prototype, run `bash scripts/design-tool.sh design_feedback '{"issue":"ONE-14"}'` and open both
+prototype, run `bash scripts/design-tool.sh design_feedback '{"issue":"PRJ-14"}'` and open both
 images it prints. They show the artboard and the exact spot the board pointed at. Build to the
 artboards marked `approved`, and ask the designer about anything still `in_review`.
 

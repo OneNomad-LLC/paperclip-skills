@@ -13,7 +13,7 @@ Then render against the running app (use `pnpm preview` for a production-like bu
 ```bash
 node <skill>/scripts/shoot.mjs \
   "http://127.0.0.1:4173/#/library" "http://127.0.0.1:4173/#/library?state=empty" \
-  --themes light,dark,night-vision \
+  --themes light,dark,high-contrast \
   --viewports desktop=1440x900,tablet=1024x600,small=800x480,phone=390x844 \
   --sheet --out renders/library
 ```

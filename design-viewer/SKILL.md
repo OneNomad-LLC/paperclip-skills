@@ -13,7 +13,7 @@ artboard. Each pin becomes a "Feedback: …" issue. These tools read the same da
 
 ```bash
 bash scripts/design-tool.sh design_status                          # artboards, statuses, lint, open feedback
-bash scripts/design-tool.sh design_feedback '{"issue":"ONE-14"}'   # the comment plus two images of the pinned spot
+bash scripts/design-tool.sh design_feedback '{"issue":"PRJ-14"}'   # the comment plus two images of the pinned spot
 bash scripts/design-tool.sh design_render                          # re-render changed files, return lint
 bash scripts/design-tool.sh design_set_status '{"screen":"dashboard","status":"in_review"}'
 ```

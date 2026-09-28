@@ -1,6 +1,6 @@
 # Build standards
 
-Defaults for a new OneNomad frontend. In an existing project, match what's there and raise
+Defaults for a new frontend. In an existing project, match what's there and raise
 disagreements as comments instead of rewriting.
 
 ## Stack

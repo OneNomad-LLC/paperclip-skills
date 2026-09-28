@@ -19,7 +19,7 @@ method, the file layout, the tooling and the bar for "done".
    PNGs and actually look at them before you claim anything about them. A comment that says
    "consistency pass done" with no screenshots reviewed is false. Lint output is a floor, not
    a review.
-2. **Ship files the board can open.** Local paths are invisible to Matt. Every deliverable
+2. **Ship files the board can open.** Local paths are invisible to the board. Every deliverable
    is uploaded to the issue as an artifact work product (see "Publishing" below) and listed
    in `design/manifest.json`.
 3. **One artboard per file, at its real size.** An artboard file renders exactly one screen,
@@ -79,15 +79,15 @@ Inline SVG icons always carry explicit `width` and `height` attributes.
 
 ```json
 {
-  "product": "Bastion",
+  "product": "Trailhead",
   "updated": "2026-09-27T22:00:00Z",
-  "themes": ["light", "dark", "night-vision"],
+  "themes": ["light", "dark", "high-contrast"],
   "sizes": { "desktop": [1440, 900], "tablet": [1024, 600], "small": [800, 480], "phone": [390, 844] },
   "system": { "tokens": "tokens.css", "styleGuide": "system/style-guide.html" },
   "artboards": [
     { "id": "library--default--desktop", "screen": "Library", "state": "default",
       "size": "desktop", "file": "artboards/library/library--default--desktop.html",
-      "status": "in_review", "issue": "ONE-3", "notes": "Grid view, 214 files" }
+      "status": "in_review", "issue": "PRJ-3", "notes": "Grid view, 214 files" }
   ],
   "prototypes": [
     { "id": "usb-insert", "title": "Insert a USB library", "entry": "prototypes/usb-insert/index.html",
@@ -111,7 +111,7 @@ artboard itself. Four tools give you the same view. Call them with the helper in
 bash scripts/design-tool.sh design_status                          # artboards, statuses, lint, stale renders, open feedback
 bash scripts/design-tool.sh design_render                          # re-render changed files, return lint (what the board will see)
 bash scripts/design-tool.sh design_render '{"files":["screens/dashboard.html"]}'
-bash scripts/design-tool.sh design_feedback '{"issue":"ONE-14"}'   # the comment plus two images: artboard with the pin, close-up
+bash scripts/design-tool.sh design_feedback '{"issue":"PRJ-14"}'   # the comment plus two images: artboard with the pin, close-up
 bash scripts/design-tool.sh design_set_status '{"screen":"dashboard","status":"in_review","note":"vitals added"}'
 ```
 
@@ -126,7 +126,7 @@ bash scripts/design-tool.sh design_set_status '{"screen":"dashboard","status":"i
 ## Rendering and lint
 
 ```bash
-node scripts/shoot.mjs design/artboards/library --themes light,dark,night-vision \
+node scripts/shoot.mjs design/artboards/library --themes light,dark,high-contrast \
   --viewports desktop=1440x900,phone=390x844 --sheet --out design/renders/library
 ```
 
